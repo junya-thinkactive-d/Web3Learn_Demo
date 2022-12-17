@@ -4,8 +4,8 @@ import { ethers } from 'ethers';
 
 import Web3LearnContractABI from '@/libs/hardhat/artifacts/contracts/Web3LearnPub.sol/Web3Learn.json';
 import type { Web3Learn as Web3LearnType } from '@/libs/hardhat/types';
-import { getEthereumSafety } from '@/utils';
 import { Split } from '@/types/contract';
+import { getEthereumSafety } from '@/utils';
 
 const CONTRACT_ADDRESS = '';
 const CONTRACT_ABI = Web3LearnContractABI.abi;
@@ -13,6 +13,7 @@ const CONTRACT_ABI = Web3LearnContractABI.abi;
 type Props = {};
 
 type ReturnUseWeb3LearnContract = {
+  mining:boolean;
   handleClimeReward: (_token: string, _amount: number) => void;
   handleBuy: (_amount: number, _token: string, _splits: Split[]) => void;
 };
@@ -67,10 +68,11 @@ export const useWeb3LearnContract = ({}: Props): ReturnUseWeb3LearnContract => {
         console.error(error);
       }
     },
-    []
+    [Web3LearnContract]
   );
 
   return {
+    mining,
     handleClimeReward,
     handleBuy,
   };
