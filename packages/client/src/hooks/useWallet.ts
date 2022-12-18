@@ -49,7 +49,9 @@ export const useWallet = (): ReturnUseWallet => {
         alert('Get Metamask!');
         return;
       }
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await ethereum.request({
+        method: 'eth_requestAccounts',
+      });
       handleSetAccount(accounts);
     } catch (error) {
       console.error(error);
