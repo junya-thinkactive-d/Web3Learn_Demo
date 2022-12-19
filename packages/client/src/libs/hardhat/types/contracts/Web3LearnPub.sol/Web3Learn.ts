@@ -46,7 +46,7 @@ export interface Web3LearnInterface extends utils.Interface {
     "_isWhitelistedToken(address)": FunctionFragment;
     "addWhitelist(address)": FunctionFragment;
     "buy(uint256,address,(uint256,address)[])": FunctionFragment;
-    "claimReard(address,uint256)": FunctionFragment;
+    "claimReward(address,uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "removeWhitelist(address)": FunctionFragment;
   };
@@ -58,7 +58,7 @@ export interface Web3LearnInterface extends utils.Interface {
       | "_isWhitelistedToken"
       | "addWhitelist"
       | "buy"
-      | "claimReard"
+      | "claimReward"
       | "owner"
       | "removeWhitelist"
   ): FunctionFragment;
@@ -88,7 +88,7 @@ export interface Web3LearnInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "claimReard",
+    functionFragment: "claimReward",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -111,7 +111,10 @@ export interface Web3LearnInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "buy", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "claimReard", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "claimReward",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeWhitelist",
@@ -207,7 +210,7 @@ export interface Web3Learn extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    claimReard(
+    claimReward(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -249,7 +252,7 @@ export interface Web3Learn extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  claimReard(
+  claimReward(
     token: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -291,7 +294,7 @@ export interface Web3Learn extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    claimReard(
+    claimReward(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -360,7 +363,7 @@ export interface Web3Learn extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    claimReard(
+    claimReward(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -403,7 +406,7 @@ export interface Web3Learn extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    claimReard(
+    claimReward(
       token: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
