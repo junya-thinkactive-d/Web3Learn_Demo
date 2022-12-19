@@ -3,5 +3,7 @@
 /* eslint-disable */
 import type * as sbtSol from "./SBT.sol";
 export type { sbtSol };
+import type * as sbt2Sol from "./SBT2.sol";
+export type { sbt2Sol };
 import type * as web3LearnPubSol from "./Web3LearnPub.sol";
 export type { web3LearnPubSol };

@@ -2,4 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as sbtSol from "./SBT.sol";
+export * as sbt2Sol from "./SBT2.sol";
 export * as web3LearnPubSol from "./Web3LearnPub.sol";

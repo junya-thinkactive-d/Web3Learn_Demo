@@ -28,5 +28,7 @@ export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
 export type { SoulBoundTest } from "./contracts/SBT.sol/SoulBoundTest";
 export { SoulBoundTest__factory } from "./factories/contracts/SBT.sol/SoulBoundTest__factory";
+export type { Web3LearnNFT } from "./contracts/SBT2.sol/Web3LearnNFT";
+export { Web3LearnNFT__factory } from "./factories/contracts/SBT2.sol/Web3LearnNFT__factory";
 export type { Web3Learn } from "./contracts/Web3LearnPub.sol/Web3Learn";
 export { Web3Learn__factory } from "./factories/contracts/Web3LearnPub.sol/Web3Learn__factory";
