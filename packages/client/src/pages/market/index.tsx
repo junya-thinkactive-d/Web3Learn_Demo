@@ -12,6 +12,7 @@ const Market = () => {
           {contentsData.map((content) => (
             <LinkMarketContent
               key={content.id}
+              pageName='learnContents'
               id={content.id}
               imgUrl={content.imgUrl}
               title={content.title}

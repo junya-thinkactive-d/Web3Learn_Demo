@@ -40,6 +40,7 @@ contract Web3Learn is ReentrancyGuard {
     address payable public owner;
     mapping(address => bool) whitelist; // JPYC, USDC
     mapping(address => mapping(address => uint256)) reward; // payee -> token -> amount
+    mapping(address => uint256[]) buyList;
 
     /*********************************************************************************************
      ************************************     STRUCT     ****************************************
