@@ -7,7 +7,7 @@ import type { Web3Learn as Web3LearnType } from '@/libs/hardhat/types';
 import { Split } from '@/types/contract';
 import { getEthereumSafety } from '@/utils';
 
-const CONTRACT_ADDRESS = '';
+const CONTRACT_ADDRESS = '0xa8d75c1f7D50Eae9a7CD55b6B3176703F7dB4ED5';
 const CONTRACT_ABI = Web3LearnContractABI.abi;
 
 type Props = {};

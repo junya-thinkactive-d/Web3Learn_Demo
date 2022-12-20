@@ -1,1 +1,1 @@
-export * from "./useWeb3LearnPub"
+export * from './useWeb3Learn';

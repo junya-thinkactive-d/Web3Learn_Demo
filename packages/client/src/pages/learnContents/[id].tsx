@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { Button, Container, MarketContent } from '@/components/shared';
-import { useWeb3LearnContract } from '@/hooks/contracts/useWeb3LearnPub';
+import { useWeb3LearnContract } from '@/hooks/contracts/useWeb3Learn';
 import { contentsData } from '@/mock';
 import { Content } from '@/types/content';
 
@@ -63,7 +63,7 @@ const LearnContents = () => {
                 </div>
                 <div>
                   <div>Splits:</div>
-                  
+
                   {content.splits.map((split, i) => (
                     <div key={i} className='text-xs ml-4'>
                       <div>Payee: {split.payee}</div>
