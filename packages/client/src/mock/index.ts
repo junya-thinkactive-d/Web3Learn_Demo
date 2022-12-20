@@ -32,7 +32,7 @@ export const contentsData: Content[] = [
     title: 'Learn English2',
     description:
       'abcdefg ajsdkl;asjdklf ajksjd;lajfkj;aklsj jalsdj;al djf;alsdj;flk ja;sd',
-    amount: 100,
+    amount: 200,
     token: '0x35d831F79e54f6b7ABD3D324822DE9084f00E27B',
     splits: [
       {
@@ -56,7 +56,7 @@ export const contentsData: Content[] = [
     title: 'Learn English3',
     description:
       'abcdefg ajsdkl;asjdklf ajksjd;lajfkj;aklsj jalsdj;al djf;alsdj;flk ja;sd',
-    amount: 100,
+    amount: 300,
     token: '0x35d831F79e54f6b7ABD3D324822DE9084f00E27B',
     splits: [
       {
