@@ -1,13 +1,43 @@
 import React from 'react';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
-const Menu = () => {
+type Props = {
+  pathname: string | undefined;
+};
+
+type Menu = {
+  link: string;
+  name: string;
+};
+
+const Menu = ({ pathname }: Props) => {
+  const menus: Menu[] = [
+    {
+      link: '/market',
+      name: 'Market',
+    },
+    {
+      link: '/myLearning',
+      name: 'My Learning',
+    },
+    {
+      link: '/nft',
+      name: 'NFT',
+    },
+  ];
+
   return (
     <ul className='flex justify-between items-center text-2xl'>
-      <li className='flex justify-center items-center w-56 h-14 text-center hover:border-2 hover:bg-stone-800 hover:text-white hover:duration-300'><Link href='/market'>Market</Link></li>
-      <li className='flex justify-center items-center w-56 h-14 text-center hover:border-2 hover:bg-stone-800 hover:text-white hover:duration-300'><Link href='/myLearning'>My Learning</Link></li>
-      <li className='flex justify-center items-center w-56 h-14 text-center hover:border-2 hover:bg-stone-800 hover:text-white hover:duration-300'><Link href='/nft'>NFT</Link></li>
+      {menus.map((menu, i) => (
+        <li key={i}>
+          <Link href={`${menu.link}`}>
+            <div className='flex justify-center items-center w-56 h-14 text-center rounded-lg hover:border-2 hover:bg-stone-800 hover:text-white hover:duration-300 hover:cursor-pointer'>
+              {menu.name}
+            </div>
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };

@@ -1,17 +1,22 @@
-import { MarketContents } from '@/components/pages/market'
-import { Container } from '@/components/shared'
-import { nftData } from '@/mock'
+import { LinkMarketContent } from '@/components/shared';
+import { Container } from '@/components/shared';
+import { contentsData } from '@/mock';
 
 import type { NextPage } from 'next';
-
 
 const Home: NextPage = () => {
   return (
     <>
-        <Container>
+      <Container>
         <div className='flex justify-between items-start'>
-          {nftData.map((nft)=>(
-            <MarketContents key={nft.id} id={nft.id} imgUrl={nft.imgUrl} title={nft.title} description={nft.description} />
+          {contentsData.map((content) => (
+            <LinkMarketContent
+              key={content.id}
+              id={content.id}
+              imgUrl={content.imgUrl}
+              title={content.title}
+              description={content.description}
+            />
           ))}
         </div>
       </Container>

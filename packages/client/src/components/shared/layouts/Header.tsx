@@ -6,6 +6,7 @@ import { ConnectWalletButton, InputSearch, Menu } from './headerParts';
 
 const Header = () => {
   const router = useRouter()
+  const pathname = router.pathname;
 
   return (
     <div className='flex justify-between items-center h-20 px-20 bg-stone-200'>
@@ -16,7 +17,7 @@ const Header = () => {
         </div>
       </div>
       <div>
-        <Menu />
+        <Menu pathname={pathname} />
       </div>
       <div>
         <ConnectWalletButton />

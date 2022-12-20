@@ -1,16 +1,22 @@
 import React from 'react';
 
-import { MarketContents } from '@/components/pages/market';
 import { Container } from '@/components/shared';
-import { nftData } from '@/mock/index';
+import { LinkMarketContent } from '@/components/shared';
+import { contentsData } from '@/mock/index';
 
 const Market = () => {
   return (
     <>
       <Container>
         <div className='flex justify-between items-start'>
-          {nftData.map((nft)=>(
-            <MarketContents key={nft.id} id={nft.id} imgUrl={nft.imgUrl} title={nft.title} description={nft.description} />
+          {contentsData.map((content) => (
+            <LinkMarketContent
+              key={content.id}
+              id={content.id}
+              imgUrl={content.imgUrl}
+              title={content.title}
+              description={content.description}
+            />
           ))}
         </div>
       </Container>
