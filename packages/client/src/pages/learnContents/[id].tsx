@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { Button, Container, MarketContent } from '@/components/shared';
+import { Button, Container, MarketContent, Mining } from '@/components/shared';
 import { useWeb3LearnContract } from '@/hooks/contracts/useWeb3Learn';
 import { contentsData } from '@/mock';
 import { Content } from '@/types/content';
 
 const LearnContents = () => {
-  const { handleBuy } = useWeb3LearnContract({});
+  const { handleBuy, mining } = useWeb3LearnContract({});
 
   const [content, setContent] = useState<Content>({
     id: 0,
@@ -42,6 +42,7 @@ const LearnContents = () => {
   return (
     <>
       <Container>
+        <Mining mining={mining} />
         <div className='flex flex-col justify-center items-center'>
           <div className='flex justify-center items-center'>
             <MarketContent

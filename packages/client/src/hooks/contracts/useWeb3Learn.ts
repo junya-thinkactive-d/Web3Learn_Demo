@@ -47,6 +47,7 @@ export const useWeb3LearnContract = ({}: Props): ReturnUseWeb3LearnContract => {
         setMining(false);
       } catch (error) {
         console.error(error);
+        setMining(false);
       }
     },
     [Web3LearnContract]
@@ -59,12 +60,13 @@ export const useWeb3LearnContract = ({}: Props): ReturnUseWeb3LearnContract => {
         const buy = await Web3LearnContract.buy(
           ethers.utils.parseEther(`${amount}`),
           token,
-          splits
+          splits,{gasLimit:50000}
         );
         setMining(true);
         await buy.wait();
         setMining(false);
       } catch (error) {
+        setMining(false)
         console.error(error);
       }
     },
