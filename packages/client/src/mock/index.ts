@@ -12,15 +12,15 @@ export const contentsData: Content[] = [
     token: '0x35d831F79e54f6b7ABD3D324822DE9084f00E27B',
     splits: [
       {
-        ratio: 9000,
+        ratio: 9000, // creator 
         payee: '0x9Ce7042FBf0595775913Cca1D71501fEA1fA2C18',
       },
       {
-        ratio: 500,
+        ratio: 500, // affiliate
         payee: '0x9Ce7042FBf0595775913Cca1D71501fEA1fA2C18',
       },
       {
-        ratio: 500,
+        ratio: 500, // platform
         payee: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
       },
     ],

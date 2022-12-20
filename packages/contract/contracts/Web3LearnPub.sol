@@ -10,7 +10,6 @@ Buy
  教材を購入する際の関数
  JPYCもしくはUSDC が送られているのかを確認
  購入した瞬間に、UserはClaimできるようにMappingの値が追加される
-
  */
 
 // 一旦, ETHは入れない
@@ -40,7 +39,6 @@ contract Web3Learn is ReentrancyGuard {
     address payable public owner;
     mapping(address => bool) whitelist; // JPYC, USDC
     mapping(address => mapping(address => uint256)) reward; // payee -> token -> amount
-    mapping(address => uint256[]) buyList;
 
     /*********************************************************************************************
      ************************************     STRUCT     ****************************************
@@ -120,7 +118,7 @@ contract Web3Learn is ReentrancyGuard {
      *********************************   PUBLIC FUNCTIONS     ************************************
      *********************************************************************************************/
 
-    function claimReward(address token, uint256 amount) public nonReentrant {
+    function claimReard(address token, uint256 amount) public nonReentrant {
         if (amount > _getReward(msg.sender, token)) revert();
         reward[msg.sender][token] -= amount;
         SafeERC20.safeTransfer(IERC20(token), msg.sender, amount);
@@ -131,7 +129,7 @@ contract Web3Learn is ReentrancyGuard {
         address token,
         Split[] memory splits
     ) external nonReentrant {
-        if (!whitelist[token]) revert();
+        // if(!whitelist[token]) revert();
         require(token == L3DTOKEN_ADDRESS, "Invalid Token");
         if (!_checkRatio(splits)) revert();
         address ADDRESS_THIS = address(this);

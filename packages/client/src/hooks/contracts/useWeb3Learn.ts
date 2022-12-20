@@ -7,7 +7,7 @@ import type { Web3Learn as Web3LearnType } from '@/libs/hardhat/types';
 import { Split } from '@/types/contract';
 import { getEthereumSafety } from '@/utils';
 
-const CONTRACT_ADDRESS = '0xa8d75c1f7D50Eae9a7CD55b6B3176703F7dB4ED5';
+const CONTRACT_ADDRESS = '0xe91e51720098803D8888a70Ae9352F0EBC65Fe7e';
 const CONTRACT_ABI = Web3LearnContractABI.abi;
 
 type Props = {};
@@ -38,7 +38,7 @@ export const useWeb3LearnContract = ({}: Props): ReturnUseWeb3LearnContract => {
     async (token: string, amount: number) => {
       try {
         if (!Web3LearnContract) return;
-        const claimReward = await Web3LearnContract.claimReward(
+        const claimReward = await Web3LearnContract.claimReard(
           token,
           ethers.utils.parseEther(`${amount}`)
         );
