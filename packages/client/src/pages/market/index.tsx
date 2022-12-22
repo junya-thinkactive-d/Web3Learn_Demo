@@ -9,9 +9,9 @@ const Market = () => {
     <>
       <Container>
         <div className='flex justify-between items-start'>
-          {contentsData.map((content) => (
+          {contentsData.map((content,i) => (
             <LinkMarketContent
-              key={content.id}
+              key={i}
               pageName='learnContents'
               id={content.id}
               imgUrl={content.imgUrl}

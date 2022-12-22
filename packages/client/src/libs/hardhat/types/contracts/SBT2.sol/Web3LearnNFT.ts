@@ -44,10 +44,12 @@ export interface Web3LearnNFTInterface extends utils.Interface {
     "_getNFT(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "checkIsMinted(address)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getNFT(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mint(address,string,string)": FunctionFragment;
+    "isMint(address,uint256)": FunctionFragment;
+    "mint(uint256,address,string,string)": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
@@ -61,9 +63,11 @@ export interface Web3LearnNFTInterface extends utils.Interface {
       | "_getNFT"
       | "approve"
       | "balanceOf"
+      | "checkIsMinted"
       | "getApproved"
       | "getNFT"
       | "isApprovedForAll"
+      | "isMint"
       | "mint"
       | "ownerOf"
       | "safeTransferFrom(address,address,uint256)"
@@ -86,6 +90,10 @@ export interface Web3LearnNFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "checkIsMinted",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -98,8 +106,13 @@ export interface Web3LearnNFTInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "isMint",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "mint",
     values: [
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>
@@ -147,6 +160,10 @@ export interface Web3LearnNFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "checkIsMinted",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
@@ -155,6 +172,7 @@ export interface Web3LearnNFTInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "isMint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -270,6 +288,11 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    checkIsMinted(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean[]] & { isMints_: boolean[] }>;
+
     getApproved(
       id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -286,7 +309,14 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    isMint(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     mint(
+      id: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
       _url: PromiseOrValue<string>,
@@ -348,6 +378,11 @@ export interface Web3LearnNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  checkIsMinted(
+    user: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean[]>;
+
   getApproved(
     id: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -364,7 +399,14 @@ export interface Web3LearnNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  isMint(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   mint(
+    id: PromiseOrValue<BigNumberish>,
     to: PromiseOrValue<string>,
     _title: PromiseOrValue<string>,
     _url: PromiseOrValue<string>,
@@ -426,6 +468,11 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    checkIsMinted(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean[]>;
+
     getApproved(
       id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -442,7 +489,14 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    isMint(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     mint(
+      id: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
       _url: PromiseOrValue<string>,
@@ -540,6 +594,11 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    checkIsMinted(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getApproved(
       id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -556,7 +615,14 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isMint(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     mint(
+      id: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
       _url: PromiseOrValue<string>,
@@ -619,6 +685,11 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    checkIsMinted(
+      user: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getApproved(
       id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -635,7 +706,14 @@ export interface Web3LearnNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    isMint(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     mint(
+      id: PromiseOrValue<BigNumberish>,
       to: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
       _url: PromiseOrValue<string>,

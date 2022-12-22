@@ -12,7 +12,7 @@ const Home: NextPage = () => {
           {contentsData.map((content,i) => (
             <LinkMarketContent
               key={i}
-              pageName='market'
+              pageName='learnContents'
               id={content.id}
               imgUrl={content.imgUrl}
               title={content.title}

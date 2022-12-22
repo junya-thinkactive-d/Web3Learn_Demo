@@ -16,8 +16,8 @@ const MintContent = ({ content }: Props) => {
 
   const handleOnClick = useCallback(() => {
     if (!currentAccount) return;
-    handleMint(currentAccount, content.title, content.imgUrl);
-  }, [content.imgUrl, content.title, currentAccount, handleMint]);
+    handleMint(content.id,currentAccount, content.title, content.imgUrl);
+  }, [content.id, content.imgUrl, content.title, currentAccount, handleMint]);
   return (
     <>
       <div className='flex flex-col justify-center items-center'>

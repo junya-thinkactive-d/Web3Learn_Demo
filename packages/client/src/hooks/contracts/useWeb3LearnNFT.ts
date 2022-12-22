@@ -2,12 +2,13 @@ import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { ethers } from 'ethers';
 
-import Web3LearnNFTContractABI from '@/libs/hardhat/artifacts/contracts/SBT2.sol/Web3LearnNFT.json';
+import { WEB3LEARN_NFT_CONTRACT_ADDRESS } from '@/constants'
+import Web3LearnNFTContractABI from '@/libs/hardhat/artifacts/contracts/SBT_DEMO.sol/Web3LearnNFT.json';
 import type { Web3LearnNFT as Web3LearnNFTType } from '@/libs/hardhat/types';
 import { NFT } from '@/types/contract';
 import { getEthereumSafety } from '@/utils';
 
-const CONTRACT_ADDRESS = '';
+const CONTRACT_ADDRESS = WEB3LEARN_NFT_CONTRACT_ADDRESS;
 const CONTRACT_ABI = Web3LearnNFTContractABI.abi;
 
 type Props = {
@@ -16,8 +17,9 @@ type Props = {
 
 type ReturnUseWeb3LearnNFTContract = {
   mining: boolean;
-  handleMint: (_to: string, _title: string, _url: string) => void;
+  handleMint: (_id: number, _to: string, _title: string, _url: string) => void;
   userNFT: NFT[] | undefined;
+  isMinted: boolean[];
 };
 
 export const useWeb3LearnNFTContract = ({
@@ -26,6 +28,7 @@ export const useWeb3LearnNFTContract = ({
   const ethereum = getEthereumSafety();
   const [mining, setMining] = useState<boolean>(false);
   const [userNFT, setUserNFT] = useState<NFT[]>();
+  const [isMinted, setIsMinted] = useState<boolean[]>([]);
 
   const Web3LearnNFTContract: Web3LearnNFTType | null = useMemo(() => {
     if (!ethereum) return null;
@@ -40,10 +43,10 @@ export const useWeb3LearnNFTContract = ({
   }, [ethereum]);
 
   const handleMint = useCallback(
-    async (to: string, title: string, url: string) => {
+    async (id: number, to: string, title: string, url: string) => {
       try {
         if (!Web3LearnNFTContract) return;
-        const mint = await Web3LearnNFTContract.mint(to, title, url);
+        const mint = await Web3LearnNFTContract.mint(id, to, title, url);
         setMining(true);
         await mint.wait();
         setMining(false);
@@ -66,13 +69,26 @@ export const useWeb3LearnNFTContract = ({
     }
   }, [Web3LearnNFTContract, user]);
 
+  const handleGetIsMint = useCallback(async () => {
+    try {
+      if (!Web3LearnNFTContract) return;
+      if (!user) return;
+      const getIsMint = await Web3LearnNFTContract.getIsMint(user);
+      setIsMinted(getIsMint);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [Web3LearnNFTContract, user]);
+
   useEffect(() => {
     handleGetNFT();
-  }, [handleGetNFT]);
+    handleGetIsMint();
+  }, [handleGetIsMint, handleGetNFT]);
 
   return {
     mining,
     handleMint,
     userNFT,
+    isMinted,
   };
 };

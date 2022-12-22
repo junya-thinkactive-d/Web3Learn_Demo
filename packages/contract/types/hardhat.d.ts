@@ -17,9 +17,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Ownable__factory>;
     getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
       name: "IERC20Permit",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20Permit__factory>;
+    getContractFactory(
+      name: "IERC20Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Metadata__factory>;
     getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -53,9 +61,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
     getContractFactory(
-      name: "SoulBoundTest",
+      name: "Web3Learn",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SoulBoundTest__factory>;
+    ): Promise<Contracts.Web3Learn__factory>;
     getContractFactory(
       name: "ERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -77,9 +85,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Web3LearnNFT__factory>;
     getContractFactory(
-      name: "Web3Learn",
+      name: "Web3LearnDemoToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Web3Learn__factory>;
+    ): Promise<Contracts.Web3LearnDemoToken__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -87,10 +95,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Ownable>;
     getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
       name: "IERC20Permit",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20Permit>;
+    getContractAt(
+      name: "IERC20Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Metadata>;
     getContractAt(
       name: "IERC20",
       address: string,
@@ -132,10 +150,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
     getContractAt(
-      name: "SoulBoundTest",
+      name: "Web3Learn",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SoulBoundTest>;
+    ): Promise<Contracts.Web3Learn>;
     getContractAt(
       name: "ERC721",
       address: string,
@@ -162,10 +180,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Web3LearnNFT>;
     getContractAt(
-      name: "Web3Learn",
+      name: "Web3LearnDemoToken",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Web3Learn>;
+    ): Promise<Contracts.Web3LearnDemoToken>;
 
     // default types
     getContractFactory(
