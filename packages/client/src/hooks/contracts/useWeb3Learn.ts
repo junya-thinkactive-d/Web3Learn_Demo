@@ -15,7 +15,7 @@ type Props = { userAddress?: string };
 
 type ReturnUseWeb3LearnContract = {
   mining: boolean;
-  handleClimeReward: (_token: string, _amount: number) => void;
+  handleClaimReward: (_token: string, _amount: number) => void;
   handleBuy: (
     _amount: number,
     _id: number,
@@ -60,11 +60,11 @@ export const useWeb3LearnContract = ({
     }
   }, [Web3LearnContract, userAddress]);
 
-  const handleClimeReward = useCallback(
+  const handleClaimReward = useCallback(
     async (token: string, amount: number) => {
       try {
         if (!Web3LearnContract) return;
-        const claimReward = await Web3LearnContract.claimReard(
+        const claimReward = await Web3LearnContract.claimReward(
           token,
           ethers.utils.parseEther(`${amount}`)
         );
@@ -109,7 +109,7 @@ export const useWeb3LearnContract = ({
 
   return {
     mining,
-    handleClimeReward,
+    handleClaimReward,
     handleBuy,
     buyList,
   };
