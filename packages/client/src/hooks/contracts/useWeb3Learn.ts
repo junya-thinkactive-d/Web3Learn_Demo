@@ -1,12 +1,12 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 
-import { WEB3LEARN_CONTRACT_ADDRESS } from '@/constants';
-import Web3LearnContractABI from '@/libs/hardhat/artifacts/contracts/DemoWeb3Learn.sol/Web3Learn.json';
-import type { Web3Learn as Web3LearnType } from '@/libs/hardhat/types';
-import { Split } from '@/types/contract';
-import { getEthereumSafety } from '@/utils';
+import { WEB3LEARN_CONTRACT_ADDRESS } from "@/constants";
+import Web3LearnContractABI from "@/libs/hardhat/artifacts/contracts/DemoWeb3Learn.sol/Web3Learn.json";
+import type { Web3Learn as Web3LearnType } from "@/libs/hardhat/types";
+import { Split } from "@/types/contract";
+import { getEthereumSafety } from "@/utils";
 
 const CONTRACT_ADDRESS = WEB3LEARN_CONTRACT_ADDRESS;
 const CONTRACT_ABI = Web3LearnContractABI.abi;

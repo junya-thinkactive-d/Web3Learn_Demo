@@ -1,11 +1,11 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 
-import { WEB3LEARN_DEMO_TOKEN_CONTRACT_ADDRESS } from '@/constants';
-import Web3LearnDemoTokenABI from '@/libs/hardhat/artifacts/contracts/Web3LearnDemoToken.sol/Web3LearnDemoToken.json';
-import type { Web3LearnDemoToken as Web3LearnDemoTokenType } from '@/libs/hardhat/types';
-import { getEthereumSafety } from '@/utils';
+import { WEB3LEARN_DEMO_TOKEN_CONTRACT_ADDRESS } from "@/constants";
+import Web3LearnDemoTokenABI from "@/libs/hardhat/artifacts/contracts/Web3LearnDemoToken.sol/Web3LearnDemoToken.json";
+import type { Web3LearnDemoToken as Web3LearnDemoTokenType } from "@/libs/hardhat/types";
+import { getEthereumSafety } from "@/utils";
 
 const CONTRACT_ADDRESS = WEB3LEARN_DEMO_TOKEN_CONTRACT_ADDRESS;
 const CONTRACT_ABI = Web3LearnDemoTokenABI.abi;
@@ -67,7 +67,7 @@ export const useWeb3LearnDemoToken = ({
         userAddress,
         contractAddress
       );
-      setIsAllowance(allowance > ethers.utils.parseEther('0') ? true : false);
+      setIsAllowance(allowance > ethers.utils.parseEther("0") ? true : false);
     } catch (error) {
       console.error(error);
     }

@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { GOERLI_CHAIN_ID } from '@/constants';
-import { getEthereumSafety } from '@/utils';
+import { GOERLI_CHAIN_ID } from "@/constants";
+import { getEthereumSafety } from "@/utils";
 
 type ReturnUseWallet = {
   isGoerliTestNetwork: boolean;
@@ -25,16 +25,16 @@ export const useWallet = (): ReturnUseWallet => {
       const account = accounts[0];
       setCurrentAccount(account);
     } else {
-      alert('No authorized account found');
+      alert("No authorized account found");
     }
   }, []);
 
   const checkIfWalletIsConnected = useCallback(async () => {
     if (!ethereum) return;
     try {
-      const accounts = await ethereum.request({ method: 'eth_accounts' });
-      const chainId = await ethereum.request({ method: 'eth_chainId' });
-      if (typeof chainId === 'string') {
+      const accounts = await ethereum.request({ method: "eth_accounts" });
+      const chainId = await ethereum.request({ method: "eth_chainId" });
+      if (typeof chainId === "string") {
         setCurrentChainId(chainId);
       }
       handleSetAccount(accounts);
@@ -46,11 +46,11 @@ export const useWallet = (): ReturnUseWallet => {
   const connectWallet = async () => {
     try {
       if (!ethereum) {
-        alert('Get Metamask!');
+        alert("Get Metamask!");
         return;
       }
       const accounts = await ethereum.request({
-        method: 'eth_requestAccounts',
+        method: "eth_requestAccounts",
       });
       handleSetAccount(accounts);
     } catch (error) {
@@ -62,14 +62,14 @@ export const useWallet = (): ReturnUseWallet => {
     if (!ethereum) return;
     checkIfWalletIsConnected();
     const handleChainChanged = (chainId: unknown) => {
-      if (typeof chainId === 'string') {
+      if (typeof chainId === "string") {
         setCurrentChainId(chainId);
       }
     };
-    ethereum.on('chainChanged', handleChainChanged);
+    ethereum.on("chainChanged", handleChainChanged);
     return () => {
       if (ethereum?.off) {
-        ethereum.off('chainChanged', handleChainChanged);
+        ethereum.off("chainChanged", handleChainChanged);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

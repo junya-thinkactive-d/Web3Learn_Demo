@@ -1,9 +1,9 @@
-import '../styles/globals.css';
+import "../styles/globals.css";
 
-import { Layout } from '@/components/shared/layouts';
-import { MyProvider } from '@/context';
+import { Layout } from "@/components/shared/layouts";
+import { MyProvider } from "@/context";
 
-import type { AppProps } from 'next/app';
+import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from "react";
 
-import Header from './Header';
+import Header from "./Header";
 
 type Props = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className='w-ful h-screen'>
+    <div className="w-ful h-screen">
       <Header />
       <div>{children}</div>
     </div>

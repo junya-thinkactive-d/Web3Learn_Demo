@@ -1,12 +1,11 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 
-import { WEB3LEARN_NFT_CONTRACT_ADDRESS } from '@/constants';
-import Web3LearnNFTContractABI from '@/libs/hardhat/artifacts/contracts/SBT_DEMO.sol/Web3LearnNFT.json';
-import type { Web3LearnNFT as Web3LearnNFTType } from '@/libs/hardhat/types';
-import { NFT } from '@/types/contract';
-import { getEthereumSafety } from '@/utils';
+import { WEB3LEARN_NFT_CONTRACT_ADDRESS } from "@/constants";
+import Web3LearnNFTContractABI from "@/libs/hardhat/artifacts/contracts/SBT_DEMO.sol/Web3LearnNFT.json";
+import type { Web3LearnNFT as Web3LearnNFTType } from "@/libs/hardhat/types";
+import { getEthereumSafety } from "@/utils";
 
 const CONTRACT_ADDRESS = WEB3LEARN_NFT_CONTRACT_ADDRESS;
 const CONTRACT_ABI = Web3LearnNFTContractABI.abi;
@@ -15,10 +14,16 @@ type Props = {
   currentAccount?: string;
 };
 
+type FormatNFT = {
+  id: number;
+  title: string;
+  url: string;
+};
+
 type ReturnUseWeb3LearnNFTContract = {
   mining: boolean;
   handleMint: (_id: number, _to: string, _title: string, _url: string) => void;
-  userNFT: NFT[] | undefined;
+  userNFT: FormatNFT[];
   isMinted: boolean[];
 };
 
@@ -27,7 +32,7 @@ export const useWeb3LearnNFTContract = ({
 }: Props): ReturnUseWeb3LearnNFTContract => {
   const ethereum = getEthereumSafety();
   const [mining, setMining] = useState<boolean>(false);
-  const [userNFT, setUserNFT] = useState<NFT[]>();
+  const [userNFT, setUserNFT] = useState<FormatNFT[]>([]);
   const [isMinted, setIsMinted] = useState<boolean[]>([]);
 
   const Web3LearnNFTContract: Web3LearnNFTType | null = useMemo(() => {
@@ -62,8 +67,15 @@ export const useWeb3LearnNFTContract = ({
       if (!Web3LearnNFTContract) return;
       if (!currentAccount) return;
       const getNFT = await Web3LearnNFTContract.getNFT(currentAccount);
-      if (!getNFT) return;
-      setUserNFT(getNFT);
+      const formatNFT = getNFT.map((nft) => {
+        return {
+          id: nft.id.toNumber() + 1,
+          title: nft.title,
+          url: nft.url,
+        };
+      });
+      if (!formatNFT) return;
+      setUserNFT(formatNFT);
     } catch (error) {
       console.error(error);
     }

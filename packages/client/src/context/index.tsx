@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, useContext } from "react";
 
-import { useWallet } from '@/hooks/useWallet';
+import { useWallet } from "@/hooks/useWallet";
 
 type WalletContextType = {
   currentAccount: string | undefined;

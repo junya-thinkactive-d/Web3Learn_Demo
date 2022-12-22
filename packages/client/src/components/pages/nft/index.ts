@@ -1,1 +1,1 @@
-export {default as NFTContent} from './NFTContent'
+export { default as NFTContent } from "./NFTContent";

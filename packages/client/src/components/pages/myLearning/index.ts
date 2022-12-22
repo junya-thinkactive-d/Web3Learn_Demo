@@ -1,1 +1,1 @@
-export {default as MintContent} from './MintContent'
+export { default as MintContent } from "./MintContent";

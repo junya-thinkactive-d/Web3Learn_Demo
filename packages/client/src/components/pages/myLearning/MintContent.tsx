@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback } from "react";
 
-import { Button, MarketContent, Mining } from '@/components/shared';
-import { useWalletContext } from '@/context';
-import { useWeb3LearnNFTContract } from '@/hooks/contracts';
-import { Content } from '@/types/content';
+import { Button, MarketContent, Mining } from "@/components/shared";
+import { useWalletContext } from "@/context";
+import { useWeb3LearnNFTContract } from "@/hooks/contracts";
+import { Content } from "@/types/content";
 
 type Props = {
   content: Content;
@@ -22,7 +22,7 @@ const MintContent = ({ content }: Props) => {
   }, [content.id, content.imgUrl, content.title, currentAccount, handleMint]);
   return (
     <>
-      <div className='flex flex-col justify-center items-center'>
+      <div className="flex flex-col justify-center items-center">
         <Mining mining={mining} />
         <MarketContent
           id={content.id}
@@ -32,17 +32,17 @@ const MintContent = ({ content }: Props) => {
         />
         {isMinted[content.id - 1] === true ? (
           <>
-            <div className='text-2xl text-white bg-amber-400 p-4'>
+            <div className="text-2xl text-white bg-amber-400 p-4">
               Already minted!
             </div>
           </>
         ) : (
           <>
-            <div className='mt-12'>
+            <div className="mt-12">
               <Button
                 onClick={handleOnClick}
-                buttonName='Mint'
-                className='bg-green-500 text-white'
+                buttonName="Mint"
+                className="bg-green-500 text-white"
               />
             </div>
           </>

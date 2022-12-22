@@ -1,13 +1,11 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
 
 type Props = {
-  children:ReactNode;
-}
+  children: ReactNode;
+};
 
-const Container = ({children}:Props) => {
-  return (
-    <div className='px-60 py-40'>{children}</div>
-  )
-}
+const Container = ({ children }: Props) => {
+  return <div className="px-60 py-40">{children}</div>;
+};
 
-export default Container
+export default Container;
