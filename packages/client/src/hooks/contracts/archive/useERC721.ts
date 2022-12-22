@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import { ethers } from 'ethers';
 
-import ERC721ABI from '@/libs/hardhat/artifacts/contracts/SBT2.sol/ERC721.json';
+import ERC721ABI from '@/libs/hardhat/artifacts/contracts/SBT_DEMO.sol/ERC721.json';
 import type { ERC721 as ERC721Type } from '@/libs/hardhat/types';
 import { getEthereumSafety } from '@/utils';
 
