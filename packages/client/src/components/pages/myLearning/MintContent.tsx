@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Button, MarketContent, Mining } from '@/components/shared';
 import { useWalletContext } from '@/context';
-import { useWeb3LearnNFTContract } from '@/hooks/contracts/useWeb3LearnNFT';
+import { useWeb3LearnNFTContract } from '@/hooks/contracts';
 import { Content } from '@/types/content';
 
 type Props = {
@@ -12,7 +12,9 @@ type Props = {
 const MintContent = ({ content }: Props) => {
   const walletContext = useWalletContext();
   const currentAccount = walletContext?.currentAccount;
-  const { mining, handleMint } = useWeb3LearnNFTContract({});
+  const { mining, handleMint, isMinted } = useWeb3LearnNFTContract({
+    currentAccount,
+  });
 
   const handleOnClick = useCallback(() => {
     if (!currentAccount) return;
@@ -28,13 +30,23 @@ const MintContent = ({ content }: Props) => {
           title={content.title}
           description={content.description}
         />
-        <div className='mt-12'>
-          <Button
-            onClick={handleOnClick}
-            buttonName='Mint'
-            className='bg-green-500 text-white'
-          />
-        </div>
+        {isMinted[content.id - 1] === true ? (
+          <>
+            <div className='text-2xl text-white bg-amber-400 p-4'>
+              Already minted!
+            </div>
+          </>
+        ) : (
+          <>
+            <div className='mt-12'>
+              <Button
+                onClick={handleOnClick}
+                buttonName='Mint'
+                className='bg-green-500 text-white'
+              />
+            </div>
+          </>
+        )}
       </div>
     </>
   );
