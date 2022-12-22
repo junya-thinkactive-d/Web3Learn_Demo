@@ -16,7 +16,7 @@ const MintContent = ({ content }: Props) => {
 
   const handleOnClick = useCallback(() => {
     if (!currentAccount) return;
-    handleMint(content.id,currentAccount, content.title, content.imgUrl);
+    handleMint(content.id, currentAccount, content.title, content.imgUrl);
   }, [content.id, content.imgUrl, content.title, currentAccount, handleMint]);
   return (
     <>
@@ -30,7 +30,7 @@ const MintContent = ({ content }: Props) => {
         />
         <div className='mt-12'>
           <Button
-            onClick={() => handleOnClick}
+            onClick={handleOnClick}
             buttonName='Mint'
             className='bg-green-500 text-white'
           />
