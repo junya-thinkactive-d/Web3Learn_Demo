@@ -51,7 +51,9 @@ export const useWeb3LearnNFTContract = ({
     async (id: number, to: string, title: string, url: string) => {
       try {
         if (!Web3LearnNFTContract) return;
-        const mint = await Web3LearnNFTContract.mint(id - 1, to, title, url);
+        const mint = await Web3LearnNFTContract.mint(id - 1, to, title, url, {
+          gasLimit: 500000,
+        });
         setMining(true);
         await mint.wait();
         setMining(false);

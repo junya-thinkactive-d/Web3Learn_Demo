@@ -1,6 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
-import { Button, MarketContent, Mining } from "@/components/shared";
+import { useRouter } from "next/router";
+
+import { Button, MarketContent, Mining, Popup } from "@/components/shared";
 import { useWalletContext } from "@/context";
 import { useWeb3LearnNFTContract } from "@/hooks/contracts";
 import { Content } from "@/types/content";
@@ -10,19 +12,44 @@ type Props = {
 };
 
 const MintContent = ({ content }: Props) => {
+  const router = useRouter();
+  const id = router.query.id;
   const walletContext = useWalletContext();
   const currentAccount = walletContext?.currentAccount;
   const { mining, handleMint, isMinted } = useWeb3LearnNFTContract({
     currentAccount,
   });
+  const [popup, setPopup] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
-  const handleOnClick = useCallback(() => {
+  const handleSetPopup = useCallback(
+    async (pop: string) => {
+      setPopup(!popup);
+      setMessage(pop);
+    },
+    [popup]
+  );
+
+  const handleMingTx = useCallback(async () => {
     if (!currentAccount) return;
     handleMint(content.id, currentAccount, content.title, content.imgUrl);
   }, [content.id, content.imgUrl, content.title, currentAccount, handleMint]);
+
+  const handleOnClick = useCallback(async () => {
+    if (!currentAccount) return;
+    await handleMingTx();
+    await handleSetPopup(`👍 ${content.title}はMINTされました！`);
+    router.reload();
+  }, [content.title, currentAccount, handleMingTx, handleSetPopup, router]);
   return (
     <>
       <div className="flex flex-col justify-center items-center">
+        <Popup
+          popup={popup}
+          message={message}
+          setPopup={setPopup}
+          setMessage={setMessage}
+        />
         <Mining mining={mining} />
         <MarketContent
           id={content.id}

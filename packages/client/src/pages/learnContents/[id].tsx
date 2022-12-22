@@ -2,7 +2,13 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 
-import { Button, Container, MarketContent, Mining } from "@/components/shared";
+import {
+  Button,
+  Container,
+  MarketContent,
+  Mining,
+  Popup,
+} from "@/components/shared";
 import {
   WEB3LEARN_CONTRACT_ADDRESS,
   WEB3LEARN_DEMO_TOKEN_CONTRACT_ADDRESS,
@@ -35,6 +41,9 @@ const LearnContents = () => {
     splits: [],
   });
   const [isBought, setIsBought] = useState<boolean>(false);
+  const [popup, setPopup] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+
   const searchContents = useCallback(() => {
     contentsData.map((content) => {
       if (content.id.toString() === id) {
@@ -43,13 +52,33 @@ const LearnContents = () => {
     });
   }, [id]);
 
-  const handleApproveOnClick = useCallback(() => {
+  const handleSetPopup = useCallback(
+    async (pop: string) => {
+      setPopup(!popup);
+      setMessage(pop);
+    },
+    [popup]
+  );
+
+  const handleApproveTx = useCallback(async () => {
     handleApprove(WEB3LEARN_CONTRACT_ADDRESS);
   }, [handleApprove]);
 
-  const handleBuyOnClick = useCallback(() => {
+  const handleApproveOnClick = useCallback(async () => {
+    await handleApproveTx();
+    await handleSetPopup("👍 購入できるようになりました！");
+    router.reload();
+  }, [handleApproveTx, handleSetPopup, router]);
+
+  const handleBuyTx = useCallback(async () => {
     handleBuy(content.amount, content.id, content.token, content.splits);
   }, [content.amount, content.id, content.splits, content.token, handleBuy]);
+
+  const handleBuyOnClick = useCallback(async () => {
+    await handleBuyTx();
+    await handleSetPopup(`👍 ${content.title}を購入しました`);
+    router.reload();
+  }, [content.title, handleBuyTx, handleSetPopup, router]);
 
   const tokenName =
     content.token === WEB3LEARN_DEMO_TOKEN_CONTRACT_ADDRESS ? "DEMO TOKEN" : "";
@@ -71,6 +100,12 @@ const LearnContents = () => {
   return (
     <>
       <Container>
+        <Popup
+          popup={popup}
+          message={message}
+          setPopup={setPopup}
+          setMessage={setMessage}
+        />
         <Mining mining={mining} />
         <Mining mining={tokenMining} />
         <div className="flex flex-col justify-center items-center">

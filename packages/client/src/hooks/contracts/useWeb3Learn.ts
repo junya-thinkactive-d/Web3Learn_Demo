@@ -84,7 +84,7 @@ export const useWeb3LearnContract = ({
       try {
         if (!Web3LearnContract) return;
         const buy = await Web3LearnContract.buy(
-          ethers.utils.formatEther(amount),
+          ethers.utils.parseEther(`${amount}`),
           id - 1,
           token,
           splits,
