@@ -1,12 +1,12 @@
-import { useCallback, useMemo, useState, useEffect } from "react";
+import { useCallback, useMemo, useState, useEffect } from 'react';
 
-import { ethers } from "ethers";
+import { ethers } from 'ethers';
 
-import { WEB3LEARN_CONTRACT_ADDRESS } from "@/constants";
-import Web3LearnContractABI from "@/libs/hardhat/artifacts/contracts/DemoWeb3Learn.sol/Web3Learn.json";
-import type { Web3Learn as Web3LearnType } from "@/libs/hardhat/types";
-import { Split } from "@/types/contract";
-import { getEthereumSafety } from "@/utils";
+import { WEB3LEARN_CONTRACT_ADDRESS } from '@/constants';
+import Web3LearnContractABI from '@/libs/hardhat/artifacts/contracts/DemoWeb3Learn.sol/Web3Learn.json';
+import type { Web3Learn as Web3LearnType } from '@/libs/hardhat/types';
+import { Split } from '@/types/contract';
+import { getEthereumSafety } from '@/utils';
 
 const CONTRACT_ADDRESS = WEB3LEARN_CONTRACT_ADDRESS;
 const CONTRACT_ABI = Web3LearnContractABI.abi;
@@ -15,6 +15,7 @@ type Props = { userAddress?: string };
 
 type ReturnUseWeb3LearnContract = {
   mining: boolean;
+  popupSign:boolean;
   handleClaimReward: (_token: string, _amount: number) => void;
   handleBuy: (
     _amount: number,
@@ -30,6 +31,7 @@ export const useWeb3LearnContract = ({
 }: Props): ReturnUseWeb3LearnContract => {
   const ethereum = getEthereumSafety();
   const [mining, setMining] = useState<boolean>(false);
+  const [popupSign, setPopupSign] = useState<boolean>(false);
   const [buyList, setBuyList] = useState<number[]>([]);
 
   const Web3LearnContract: Web3LearnType | null = useMemo(() => {
@@ -95,8 +97,13 @@ export const useWeb3LearnContract = ({
         setMining(true);
         await buy.wait();
         setMining(false);
+        setPopupSign(true);
+        setTimeout(() => {
+          setPopupSign(false), 5000;
+        });
       } catch (error) {
         setMining(false);
+        setPopupSign(false);
         console.error(error);
       }
     },
@@ -109,6 +116,7 @@ export const useWeb3LearnContract = ({
 
   return {
     mining,
+    popupSign,
     handleClaimReward,
     handleBuy,
     buyList,
