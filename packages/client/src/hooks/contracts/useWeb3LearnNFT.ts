@@ -22,7 +22,7 @@ type FormatNFT = {
 
 type ReturnUseWeb3LearnNFTContract = {
   mining: boolean;
-  popupSign:boolean;
+  popupSign: boolean;
   handleMint: (_id: number, _to: string, _title: string, _url: string) => void;
   userNFT: FormatNFT[];
   isMinted: boolean[];
@@ -33,7 +33,7 @@ export const useWeb3LearnNFTContract = ({
 }: Props): ReturnUseWeb3LearnNFTContract => {
   const ethereum = getEthereumSafety();
   const [mining, setMining] = useState<boolean>(false);
-  const [popupSign,setPopupSign] = useState<boolean>(false);
+  const [popupSign, setPopupSign] = useState<boolean>(false);
   const [userNFT, setUserNFT] = useState<FormatNFT[]>([]);
   const [isMinted, setIsMinted] = useState<boolean[]>([]);
 

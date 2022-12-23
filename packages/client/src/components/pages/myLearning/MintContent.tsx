@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState } from "react";
 
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-import { Button, MarketContent, Mining, Popup } from '@/components/shared';
-import { useWalletContext } from '@/context';
-import { useWeb3LearnNFTContract } from '@/hooks/contracts';
-import { Content } from '@/types/content';
+import { Button, MarketContent, Mining, Popup } from "@/components/shared";
+import { useWalletContext } from "@/context";
+import { useWeb3LearnNFTContract } from "@/hooks/contracts";
+import { Content } from "@/types/content";
 
 type Props = {
   content: Content;
@@ -16,11 +16,11 @@ const MintContent = ({ content }: Props) => {
   const id = router.query.id;
   const walletContext = useWalletContext();
   const currentAccount = walletContext?.currentAccount;
-  const { mining,popupSign, handleMint, isMinted } = useWeb3LearnNFTContract({
+  const { mining, popupSign, handleMint, isMinted } = useWeb3LearnNFTContract({
     currentAccount,
   });
   const [popup, setPopup] = useState<boolean>(false);
-  const [popupMessage, setPopupMessage] = useState<string>('');
+  const [popupMessage, setPopupMessage] = useState<string>("");
 
   const handleSetPopup = useCallback(async (pop: string) => {
     setPopup(true);
@@ -40,9 +40,10 @@ const MintContent = ({ content }: Props) => {
   }, [content.title, currentAccount, handleMingTx, handleSetPopup]);
   return (
     <>
-      <div className='flex flex-col justify-center items-center'>
+      <div className="flex flex-col justify-center items-center">
         <Popup
           popup={popup}
+          popupSign={popupSign}
           message={popupMessage}
           setPopup={setPopup}
           setMessage={setPopupMessage}
@@ -56,17 +57,17 @@ const MintContent = ({ content }: Props) => {
         />
         {isMinted[content.id - 1] === true ? (
           <>
-            <div className='text-2xl text-white bg-amber-400 p-4'>
+            <div className="text-2xl text-white bg-amber-400 p-4">
               Already minted!
             </div>
           </>
         ) : (
           <>
-            <div className='mt-12'>
+            <div className="mt-12">
               <Button
                 onClick={handleOnClick}
-                buttonName='Mint'
-                className='bg-green-500 text-white'
+                buttonName="Mint"
+                className="bg-green-500 text-white"
               />
             </div>
           </>
